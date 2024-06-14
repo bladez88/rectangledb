@@ -1,6 +1,7 @@
 package com.example.rectangledb.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 
 @Entity
 @Table(name="rectangles")
@@ -8,9 +9,17 @@ public class Rectangle {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int uid;
+
+    @NotBlank(message = "Name is mandatory")
     private String name;
+    
+    @Pattern(regexp = "^([A-Fa-f0-9]{6})$", message = "Color must be a valid hexadecimal code")
     private String color;
+
+    @Min(value = 1, message = "Width must be greater than 0")
     private int width;
+
+    @Min(value = 1, message = "Height must be greater than 0")
     private int height;
 
     // Default constructor
