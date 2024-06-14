@@ -1,5 +1,3 @@
-package com.example.rectangledb;
-
 import io.github.cdimascio.dotenv.Dotenv;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -7,14 +5,16 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class RectangledbApplication {
 
-	public static void main(String[] args) {
-		// Load environment variables from .env file
-        Dotenv dotenv = Dotenv.load();
+    public static void main(String[] args) {
+        // Explicitly specify the path to the .env file
+        Dotenv dotenv = Dotenv.configure()
+                                .directory(".") // Specify the directory where .env file is located
+                                .load();
 
-        // Set system properties for Spring Boot to use
-        dotenv.entries().forEach(entry -> System.setProperty(entry.getKey(), entry.getValue()));
+        // Example: Load an environment variable from .env
+        String apiKey = dotenv.get("API_KEY");
 
-		SpringApplication.run(RectangledbApplication.class, args);
-	}
-
+        // Spring Boot application startup
+        SpringApplication.run(RectangledbApplication.class, args);
+    }
 }
