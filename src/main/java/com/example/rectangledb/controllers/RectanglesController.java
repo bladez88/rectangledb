@@ -2,6 +2,7 @@ package com.example.rectangledb.controllers;
 import com.example.rectangledb.models.RectangleRepository;
 
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,12 +11,9 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.rectangledb.models.Rectangle;
 
@@ -58,13 +56,15 @@ public class RectanglesController {
      * @return redirects to add.html
      */
     @PostMapping("/rectangles/add")
-    public String addRectangle(@RequestParam Map<String, String> newrec, HttpServletResponse response) {
+    public String addRectangle(@Valid @ModelAttribute Rectangle rectangle, BindingResult result, HttpServletResponse response,  RedirectAttributes redirectAttributes) {
+        if (result.hasErrors()) {
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.rectangle", result);
+            redirectAttributes.addFlashAttribute("rectangle", rectangle);
+            return "add"; // replace with the view that shows the for
+        }
         System.out.println("ADD rectangle");
-        String newName = newrec.get("name");
-        String newColor = newrec.get("color");
-        int newWidth = Integer.parseInt(newrec.get("width"));
-        int newHeight = Integer.parseInt(newrec.get("height"));
-        rectangleRepo.save(new Rectangle(newName, newColor, newWidth, newHeight));
+        rectangleRepo.save(rectangle);
         response.setStatus(201);
         return "redirect:/add.html";
     }

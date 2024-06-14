@@ -3,6 +3,9 @@ package com.example.rectangledb.models;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 
+/**
+ * Includes data verification
+ */
 @Entity
 @Table(name="rectangles")
 public class Rectangle {
@@ -12,7 +15,7 @@ public class Rectangle {
 
     @NotBlank(message = "Name is mandatory")
     private String name;
-    
+
     @Pattern(regexp = "^([A-Fa-f0-9]{6})$", message = "Color must be a valid hexadecimal code")
     private String color;
 
