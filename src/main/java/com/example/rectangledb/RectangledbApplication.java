@@ -13,12 +13,6 @@ public class RectangledbApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(RectangledbApplication.class, args);
-
-        // Accessing environment variables directly after context is initialized
-        String apiKey = System.getenv("API_KEY");
-        String dbUrl = System.getenv("DATABASE_URL");
-
-        System.out.println("API Key: " + apiKey);
-        System.out.println("Database URL: " + dbUrl);
+		
     }
 }
