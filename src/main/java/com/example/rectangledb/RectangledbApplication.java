@@ -1,20 +1,29 @@
 package com.example.rectangledb;
 
-import io.github.cdimascio.dotenv.Dotenv;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.core.env.Environment;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @SpringBootApplication
 public class RectangledbApplication {
 
-	public static void main(String[] args) {
-		// Load environment variables from .env file
-        Dotenv dotenv = Dotenv.load();
+    @Autowired
+    private Environment env;
 
-        // Set system properties for Spring Boot to use
-        dotenv.entries().forEach(entry -> System.setProperty(entry.getKey(), entry.getValue()));
+    public static void main(String[] args) {
+        SpringApplication.run(RectangledbApplication.class, args);
+    }
 
-		SpringApplication.run(RectangledbApplication.class, args);
-	}
-
+    @Bean
+    public void exampleBean() {
+        // Accessing environment variables
+        String apiKey = env.getProperty("API_KEY");
+        String dbUrl = env.getProperty("DATABASE_URL");
+        // Use the variables as needed
+        System.out.println("API Key: " + apiKey);
+        System.out.println("Database URL: " + dbUrl);
+    }
 }
