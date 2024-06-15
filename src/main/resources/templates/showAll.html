@@ -26,6 +26,8 @@
                             <th class=tabledatah1>Name</th>
                             <th class=tabledatah1>Color</th>
                             <th class=tabledatah1></th>
+                            <th class=tabledatah1></th>
+                            <th class=tabledatah1></th>
                         </tr>
                     </thead>
                     <tbody id="tablebody" th:each="rectangle, stat : ${rec}">
@@ -38,6 +40,11 @@
                             </td>
                             <td class=tabledata1><span th:text="${rectangle.color}"></span></td>
                             <td class=tabledata1>
+                            </td>
+                            <td>
+                                <form th:action="@{/rectangles/edit/{uid}(uid=${rectangle.uid})}" method="get">
+                                    <button type="submit" class="btn btn-outline-warning">EDIT</button>
+                                </form>
                             </td>
                             <td>
                                 <form th:action="@{/rectangles/delete/{uid}(uid=${rectangle.uid})}" method="post" 
