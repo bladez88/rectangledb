@@ -17,7 +17,7 @@
             <div class="col-md-4">
                 <h1><span th:text="${rec1.name}"></span> THE RECTANGLE
                 </h1>
-                <div th:style="'display:flex; justify-content:space-between'" style="margin-bottom: 6px;">
+                <div th:style="'display:flex; justify-content:space-between'">
                     <a href="/rectangles/view" class="btn btn-outline-warning">BACK</a>
 
                     <form th:action="@{/rectangles/delete/{uid}(uid=${rec1.uid})}" method="post"
@@ -28,7 +28,7 @@
                 </div>
 
 
-                <table id="calctable" class="table table-striped-columns">
+                <table id="calctable" class="table table-striped-columns" style="margin-bottom: 6px;">
                     <tbody>
                         <tr>
                             <th class=tabledatah1>Name:</th>
