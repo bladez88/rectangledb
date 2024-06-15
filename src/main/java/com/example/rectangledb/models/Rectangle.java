@@ -16,7 +16,7 @@ public class Rectangle {
     @NotBlank(message = "Name is mandatory")
     private String name;
 
-    @Pattern(regexp = "^([A-Fa-f0-9]{6})$", message = "Color must be a valid hexadecimal code")
+    @Pattern(regexp = "^([A-Fa-f0-9]{6})$", message = "Color must be a valid hexadecimal code ex:FFFFFF (6 numbers)")
     private String color;
 
     @Min(value = 1, message = "Width must be greater than 0")
