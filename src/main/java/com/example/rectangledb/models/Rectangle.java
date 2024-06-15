@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 
 /**
+ * Rectangle Class
  * Includes data verification
  */
 @Entity

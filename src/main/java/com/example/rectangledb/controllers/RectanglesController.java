@@ -55,7 +55,7 @@ public class RectanglesController {
     /**
      * Add a rectangle to the database
      * 
-     * @param newrec   Data of new rectangle
+     * @param newrec Data of new rectangle
      * @param response
      * @return redirects to add.html
      */
@@ -64,9 +64,9 @@ public class RectanglesController {
             HttpServletResponse response, RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.rectangle", result);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.rectangle", result); // keep errors on this page
             redirectAttributes.addFlashAttribute("rectangle", rectangle);
-            return "add"; // replace with the view that shows the for
+            return "add"; 
         }
         System.out.println("ADD rectangle");
         rectangleRepo.save(rectangle);
@@ -105,13 +105,13 @@ public class RectanglesController {
     public String editRectangle(@Valid @ModelAttribute Rectangle rectangle, BindingResult result, HttpServletResponse response, RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            redirectAttributes.addFlashAttribute("errors", result);
-            redirectAttributes.addFlashAttribute("rec1", rectangle);
+            redirectAttributes.addFlashAttribute("errors", result); // keeps errors for this page
+            redirectAttributes.addFlashAttribute("rec1", rectangle); // keep this object in this page
             return "redirect:/rectangles/edit/" + rectangle.getUid(); // return the view for editing the rectangle
         }
         System.out.println("EDIT rectangle");
         System.out.println(rectangle.getUid());
-        rectangleRepo.save(rectangle);
+        rectangleRepo.save(rectangle); // edits the rectangle
         response.setStatus(HttpServletResponse.SC_OK);
         return "redirect:/rectangles/view";
     }
@@ -127,7 +127,7 @@ public class RectanglesController {
     public String deleteRectangle(@PathVariable int rectangleIud, HttpServletResponse response) {
         System.out.println(rectangleIud);
         if (rectangleRepo.existsById(rectangleIud)) {
-            rectangleRepo.deleteById(rectangleIud);
+            rectangleRepo.deleteById(rectangleIud); // deletes the rectangle
         }
         response.setStatus(204);
         return "redirect:/rectangles/view";
