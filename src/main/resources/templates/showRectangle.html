@@ -17,7 +17,7 @@
             <div class="col-md-4">
                 <h1><span th:text="${rec1.name}"></span> THE RECTANGLE
                 </h1>
-                <div th:style="'display:flex; justify-content:space-between'">
+                <div th:style="'display:flex; justify-content:space-between'" style="margin-bottom: 6px;">
                     <a href="/rectangles/view" class="btn btn-outline-warning">BACK</a>
 
                     <form th:action="@{/rectangles/delete/{uid}(uid=${rec1.uid})}" method="post"
